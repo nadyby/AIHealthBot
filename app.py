@@ -7,7 +7,9 @@ from datetime import datetime
 st.set_page_config(page_title="AIHealthBot", page_icon="🤖", layout="wide")
 
 # FastAPI address
-HOST = "http://localhost:8181/answer"
+#HOST = "http://localhost:8181/answer"
+
+HOST = "https://aihealthbot-chat-api-1021257385286.europe-west1.run.app"
 
 # Load logo
 logo_path = "images/logo.png"
@@ -52,7 +54,7 @@ def get_bot_response(user_input):
         if not is_greeting:
             with st.spinner(" Processing..."):
                 sources_response = requests.post(
-                    "http://localhost:8181/get_sources",
+                    "https://aihealthbot-chat-api-1021257385286.europe-west1.run.app/get_sources",
                     json={"question": user_input, "language": "en"},
                     timeout=15
                 )
@@ -86,7 +88,7 @@ def get_bot_response(user_input):
         }
         
         with st.spinner(" Generating response..."):
-            response = requests.post("http://localhost:8181/answer", json=data, timeout=15)
+            response = requests.post("https://aihealthbot-chat-api-1021257385286.europe-west1.run.app/answer", json=data, timeout=15)
             if response.status_code == 200:
                 response_data = response.json()
                 raw_message = response_data.get('message', 'No response generated.')

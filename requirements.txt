@@ -1,21 +1,38 @@
-#streamlit
+# Streamlit
 streamlit
 streamlit_extras
 pillow
 
-#API
+# API
 fastapi
-pydantic
 uvicorn
 pydantic
 requests
 python-dotenv
 langchain-core
 langchain_google_genai
-logging
 
-#eval
-sklearn
+
+# LangChain 
+langchain-core
+langchain_google_genai
+langchain_google_cloud_sql_pg
+langchain_google_vertexai
+langchain_unstructured
+
+# Google Cloud
+google-cloud-storage
+
+# Evaluation tools
 pandas
-random
-time
+tqdm
+scikit-learn
+giskard
+litellm
+
+# Database
+sqlalchemy
+
+# Async support
+aiohttp
+asyncio
