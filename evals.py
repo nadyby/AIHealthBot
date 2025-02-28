@@ -10,11 +10,10 @@ from dotenv import load_dotenv
 import os
 import litellm
 
-# Charger les variables d’environnement depuis .env
 load_dotenv()
 
 # Configuration
-API_URL = "http://localhost:8181"
+API_URL = "https://aihealthbot-chat-api-1021257385286.europe-west1.run.app"
 NUM_SAMPLES = 10  
 SEED = 42
 DATASET_PATH = "downloaded_files/medquad.csv"
@@ -113,10 +112,8 @@ def main():
     samples = select_random_samples(df, NUM_SAMPLES, SEED)
     logging.info(f"Échantillons sélectionnés: {len(samples)}")
     
-    # Créer le wrapper pour AIHealthBot
     aihealth_bot = AIHealthBotModel(API_URL)
     
-    # Calculer les métriques personnalisées
     predictions = aihealth_bot.predict(samples)
     
     avg_response_time = predictions['response_time'].mean()
@@ -166,7 +163,6 @@ def main():
     print(f"Ratio moyen de mots-clés communs: {avg_keyword_ratio:.2f}")
     print(f"Résultats détaillés sauvegardés dans: evaluation_results_aihealthbot.json.json")
     
-    # Vérifier que GOOGLE_API_KEY est chargée
     google_api_key = os.getenv("GOOGLE_API_KEY")
     if not google_api_key:
         raise ValueError("La clé GOOGLE_API_KEY n’a pas été trouvée dans .env")

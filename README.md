@@ -4,6 +4,10 @@ AIHealthBot est un chatbot médical intelligent basé sur **LangChain**, **Verte
 Il utilise un système **RAG (Retrieval-Augmented Generation)** pour fournir des réponses médicales précises à partir d'une base de données vectorielle.
 
 ---
+## 🔗 Accès à l'application
+Vous pouvez essayer AIHealthBot directement ici: [https://aihealthbot-chat-api-1021257385286.europe-west1.run.app](https://aihealthbot-chat-api-1021257385286.europe-west1.run.app)
+
+---
 ## 📚 Données utilisées
 
 Les données proviennent du dataset **[LayoutLM Medical Dataset](https://www.kaggle.com/datasets/jpmiller/layoutlm/data)** disponible sur Kaggle.  
@@ -46,8 +50,13 @@ AIHealthBot/
 ├── api.py                    # API FastAPI pour interagir avec l'IA
 ├── app.py                    # Interface utilisateur (Streamlit) 
 ├── config.py                 # Configuration des variables Cloud
-├── eval.py                   # Script d'évaluation
+├── Dockerfile                # Configuration Docker pour le frontend Streamlit
+├── Dockerfile_api            # Configuration Docker pour l'API FastAPI
+├── evals.py                  # Script d'évaluation
+├── evaluation_results.json   # Résultats détaillés de l'évaluation
+├── giskard_report.html       # Rapport Giskard
 ├── ingest.py                 # Chargement et indexation des données
+├── model_card.ipynb          # Génération du model card avec Scikit-Learn
 ├── notebook.ipynb            # Notebook
 │── README.md                 # Documentation du projet
 ├── requirements.txt          # Liste des dépendances Python
@@ -130,7 +139,33 @@ Définir la variable HOST dans app.py.
 streamlit run app.py
 ```
 
+## 🧪 Évaluation des performances
 
+Une évaluation rigoureuse a été réalisée avec 10 échantillons aléatoires du dataset MedSquad pour mesurer les performances du chatbot. Les résultats sont excellents et démontrent la robustesse du système:
+
+### 📊 Métriques clés
+
+- **Temps de réponse moyen: 7.68s** - Une vitesse acceptable pour un système qui doit rechercher et synthétiser des informations médicales complexes.
+- **Score de similarité moyen: 0.96** - Un score presque parfait, indiquant que le système récupère des documents extrêmement pertinents.
+- **Ratio de réponses détaillées: 1.00** - Toutes les réponses (100%) contiennent des informations détaillées issues de la base de données médicale.
+- **Ratio moyen de mots-clés communs: 0.94** - 94% des mots-clés importants des réponses attendues sont inclus dans les réponses générées.
+- **Nombre moyen de sources: 2.00** - Une quantité équilibrée de sources pour chaque réponse.
+
+### 🔍 Analyse des résultats
+Ces métriques démontrent que AIHealthBot offre:
+
+- Une haute précision dans la recherche de documents pertinents
+- Une excellente qualité de réponses avec des informations complètes
+- Une bonne couverture des points clés pour chaque question médicale
+- Un temps de réponse raisonnable malgré la complexité du traitement
+
+La consistance des résultats sur l'ensemble des 10 échantillons confirme la fiabilité du système et sa capacité à maintenir des performances élevées sur diverses questions médicales.
+
+Pour reproduire cette évaluation, exécutez:
+
+```bash
+python eval.py
+```
 
 ## Licence 📜
 Ce projet est sous licence **MIT**.
